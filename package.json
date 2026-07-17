@@ -1,7 +1,7 @@
 {
-  "name": "vibedroid-pro",
+  "name": "vibe-dev-companion",
   "version": "2.0.0",
-  "description": "VibeDroid Pro - AI-powered Electron dev companion",
+  "description": "Vibe Dev Companion — Electron-based AI dev companion with phone-frame UI, persistent prefs, IPC window controls, URL history & animated splash screen",
   "main": "index.js",
   "author": "pangerlkr",
   "license": "MIT",
@@ -9,7 +9,17 @@
     "start": "electron .",
     "test": "echo \"No tests specified\" && exit 0"
   },
-  "keywords": ["electron", "ai", "developer-tools", "vibe-coding"],
+  "keywords": [
+    "electron",
+    "ai",
+    "developer-tools",
+    "vibe-coding",
+    "desktop-app",
+    "frameless-window",
+    "phone-preview",
+    "ipc",
+    "url-history"
+  ],
   "devDependencies": {
     "electron": "^43.1.1"
   }
