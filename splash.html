@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Dev Companion</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: #05050c;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        /* Animated orb */
+        .orb {
+            width: 88px; height: 88px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #00f2fe, #4facfe, #a18cd1, #fbc2eb, #00f2fe);
+            animation: orbSpin 4s linear infinite, orbPulse 2.5s ease-in-out infinite;
+            box-shadow: 0 0 48px rgba(0,242,254,0.5);
+            margin-bottom: 28px;
+        }
+        @keyframes orbSpin  { to { transform: rotate(360deg); } }
+        @keyframes orbPulse {
+            0%, 100% { box-shadow: 0 0 40px rgba(0,242,254,0.45); transform: rotate(var(--r,0deg)) scale(1); }
+            50%       { box-shadow: 0 0 70px rgba(0,242,254,0.75); transform: rotate(var(--r,0deg)) scale(1.08); }
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 4px;
+        }
+        .sub {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        /* Progress */
+        .progress-wrap {
+            width: 180px; height: 2px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 99px;
+            overflow: hidden;
+            margin-bottom: 14px;
+        }
+        .progress-bar {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, #00f2fe, #a18cd1);
+            border-radius: 99px;
+            transition: width 0.3s ease;
+        }
+        .status {
+            font-size: 11px;
+            color: rgba(255,255,255,0.25);
+            letter-spacing: 1px;
+            min-height: 16px;
+        }
+
+        .version {
+            position: fixed;
+            bottom: 14px; right: 16px;
+            font-size: 10px;
+            color: rgba(255,255,255,0.15);
+            letter-spacing: 0.5px;
+        }
+
+        .badge {
+            position: fixed;
+            bottom: 14px; left: 16px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(0,242,254,0.4);
+            border: 1px solid rgba(0,242,254,0.15);
+            padding: 3px 8px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="orb"></div>
+    <h1>Vibe Dev Companion</h1>
+    <p class="sub">Powered by Electron + AI</p>
+    <div class="progress-wrap">
+        <div class="progress-bar" id="progress"></div>
+    </div>
+    <p class="status" id="status">Starting up...</p>
+    <p class="version">v2.0.0</p>
+    <p class="badge">AI Ready</p>
+
+    <script>
+        const bar    = document.getElementById('progress');
+        const status = document.getElementById('status');
+        const steps  = [
+            [12,  'Loading preferences...'],
+            [28,  'Initializing AI capture...'],
+            [48,  'Mounting IPC bridge...'],
+            [65,  'Building window frame...'],
+            [80,  'Connecting renderer...'],
+            [95,  'Almost ready...'],
+            [100, 'Ready!']
+        ];
+        let i = 0;
+        function tick() {
+            if (i >= steps.length) return;
+            const [pct, msg] = steps[i++];
+            bar.style.width  = pct + '%';
+            status.textContent = msg;
+            if (i < steps.length) setTimeout(tick, 300 + Math.random() * 250);
+        }
+        setTimeout(tick, 300);
+    </script>
+</body>
+</html>
